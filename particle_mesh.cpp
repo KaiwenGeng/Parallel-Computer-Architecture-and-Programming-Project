@@ -63,18 +63,18 @@ public:
         #pragma omp parallel for 
         for (auto& particle : particles) {
             for (int k = 0; k < 3; ++k) {
-                particle.velocity[k] += timeStep * particle.force[k] / particle.mass;
-                particle.position[k] += timeStep * particle.velocity[k];
+                particle.velocity[k] += timeStep * particle.force[k] / particle.mass; // F = ma
+                particle.position[k] += timeStep * particle.velocity[k]; // s = ut + 0.5at^2
             }
         }
     }
     void generateRandomParticles(int n) {
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_real_distribution<> massDist(0.5, 2);  
-        std::uniform_real_distribution<> chargeDist(-0.05, 0.05);  
-        std::uniform_real_distribution<> posDist(-100, 100);  
-        std::uniform_real_distribution<> velDist(-0.05, 0.05);  
+        std::uniform_real_distribution<> massDist(0.5, 2);  // Mass between 0.5 and 2 kg
+        std::uniform_real_distribution<> chargeDist(-0.05, 0.05);  // Charge between -0.05 and 0.05 C
+        std::uniform_real_distribution<> posDist(-100, 100);  // Position between -100 and 100 m
+        std::uniform_real_distribution<> velDist(-0.05, 0.05);  // Velocity between -0.05 and 0.05 m/s
         #pragma omp parallel for 
         for (int i = 0; i < n; ++i) {
             double mass = massDist(gen);
@@ -107,8 +107,8 @@ public:
 
 int main() {
     P3MSimulator sim(0.0025);
-    int iterations = 100;
-    sim.generateRandomParticles(10);
+    int iterations = 100; // Number of iterations to run the simulation for
+    sim.generateRandomParticles(10); // Generate 10 random particles
     // sim.addParticle(Particle(5, 100000, {500, 500, 500}, {0, 0, 0}));
     
 
@@ -162,4 +162,5 @@ int main() {
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
     std::cout << "Elapsed time: " << elapsed.count() << "s\n";
+    
 }
