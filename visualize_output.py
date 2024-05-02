@@ -87,6 +87,7 @@ def update(frame):
     ax.set_xlim(min_x, max_x)
     ax.set_ylim(min_y, max_y)
     ax.set_zlim(min_z, max_z)
+    
     # Add a legend if there are multiple coordinates
     # if len(coords['xs']) > 1:
     #     ax.legend()
