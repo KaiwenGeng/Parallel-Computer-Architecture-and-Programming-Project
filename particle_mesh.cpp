@@ -27,11 +27,9 @@ private:
 
 public:
     P3MSimulator(double dt) : timeStep(dt) {}
-
     void addParticle(const Particle& particle) {
         particles.push_back(particle);
     }
-
     void computeForces() {
         // Reset forces
         #pragma omp parallel for 
@@ -109,10 +107,10 @@ public:
 
 int main() {
     P3MSimulator sim(0.0025);
-    int iterations = 200;
-    sim.generateRandomParticles(20);
-    sim.addParticle(Particle(5, 100000, {500, 500, 500}, {0, 0, 0}));
-
+    int iterations = 100;
+    sim.generateRandomParticles(10);
+    // sim.addParticle(Particle(5, 100000, {500, 500, 500}, {0, 0, 0}));
+    
 
     std::vector<std::tuple<double, double, double>> temp_coordinates;
     std::map<std::string, std::vector<std::tuple<double, double, double>>> position_data;
