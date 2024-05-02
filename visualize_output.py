@@ -84,10 +84,6 @@ def update(frame):
         ax.scatter(coords['xs'][i], coords['ys'][i], coords['zs'][i], color=color, 
                 s=w*10,  # Scale size by weight; adjust the factor as needed
                 label=f'Coordinate {i+1}')
-
-
-        
-
     ax.set_xlim(min_x, max_x)
     ax.set_ylim(min_y, max_y)
     ax.set_zlim(min_z, max_z)
